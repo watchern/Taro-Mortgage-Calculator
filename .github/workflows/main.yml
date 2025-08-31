@@ -32,6 +32,15 @@ jobs:
       - name: Install Dependencies
         run: |
           yarn
+      - name: Build Taro React Native Bundle
+        run: |
+          yarn build:rn --platform android
+      - name: Upload bundle Products
+        uses: actions/upload-artifact@v4
+        with:
+          name: bundle-${{ env.BUILD_TYPE }}
+          #/android/index.android.bundle
+          path: ${{ github.workspace }}/android
       - name: Release Taro React Native bundle
         uses: zhiqingchen/taro-react-native-release@v1
         with:
